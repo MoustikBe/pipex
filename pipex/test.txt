@@ -1,4 +1,0 @@
-Le fichier que j'ecrit va me servir de test 
-pour le pipex
-comme sa je pourrais voir si mon programme fonctionne 
-correctement 
