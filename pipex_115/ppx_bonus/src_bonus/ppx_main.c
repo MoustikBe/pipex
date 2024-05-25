@@ -22,8 +22,6 @@ void	command_execution(char **envp, char **argv, int index)
 	id_path = path_finder(envp);
 	split_path = ft_split(envp[id_path], ':');
 	path = locate_path(split_path, argv[index]);
-	if (path == NULL)
-		error();
 	arguments = ft_split(argv[index], ' ');
 	execve(path, arguments, NULL);
 }
