@@ -22,6 +22,8 @@ void	command_execution(char **envp, char **argv, int index)
 	id_path = path_finder(envp);
 	split_path = ft_split(envp[id_path], ':');
 	path = locate_path(split_path, argv[index]);
+	//if (path == NULL)
+	//	error();
 	arguments = ft_split(argv[index], ' ');
 	execve(path, arguments, NULL);
 }
@@ -34,6 +36,15 @@ void	sub_process(t_pipex *ppx, pid_t pid, char **argv, char **envp)
 		if (pid == -1)
 			error();
 		createprocessus(pid, ppx, argv, envp);
+	}
+}
+
+void wait_execution(int nb_cmd)
+{
+	int status;
+
+	while(nb_cmd--){
+		waitpid(-1, &status, 0);
 	}
 }
 
@@ -62,6 +73,7 @@ void	ppx_bonus(int argc, char **argv, char **envp)
 	if (pid == -1)
 		error();
 	last_step(pid, ppx, argv, envp);
+	wait_execution(argc - 3);
 	close(ppx->fd_temp);
 }
 
@@ -94,3 +106,4 @@ int	main(int argc, char **argv, char **envp)
 		pipex(argv, envp);
 	return (0);
 }
+
